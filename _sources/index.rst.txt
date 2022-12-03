@@ -1,0 +1,129 @@
+.. fix ext_alignment documentation master file, created by
+   sphinx-quickstart on Sat Dec  3 02:03:47 2022.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+fix ext_alignment command
+=============================================
+
+Syntax
+---------------------------------------------
+
+::
+
+  fix ID group-ID ext_alignment particle_axis fdx fdy fdz force_constant
+
+- ID, group-ID are documented in fix_ command
+
+- ext_alignment = style name of this fix command
+
+- particle_axis = *angle_f* or *angle_v* or *angle_u*
+
+- fdx,fdy,fdz = external field component values (distance units)
+
+- force_constant = alignment force constant magnitude (force units)
+
+
+    .. _fix: https://docs.lammps.org/fix.html
+
+Examples
+--------------------------------------------
+
+::
+
+  fix torque all ext_alignment angle_u 1 1 0 90.0
+  fix torque crystals ext_alignment angle_v 0 1 0 150.0
+  fix field polymer ext_alignment angle_u 0 0 1 1000.0
+
+Description
+--------------------------------------------
+
+Add a torque to a specified axis of a particular group of finite-size particles with respect to a fixed direction.
+The applied torque is as follows:
+
+.. math::
+   :nowrap:
+
+   \[
+   {\bf\tau} =
+   \left\{
+   \begin{array}{
+     @{}% no padding
+     l@{\quad}% some padding
+     r@{}% no padding
+     >{{}}r@{}% no padding
+     >{{}}l@{}% no padding
+   }
+     k({\hat{u}_i}{\times}{\hat{\psi}}),&         & {\rm if} & {\hat{u}_i}{\cdot}{\hat{\psi}}>0 \\
+     -k({\hat{u}_i}{\times}{\hat{\psi}}),&        & {\rm if} & {\hat{u}_i}{\cdot}{\hat{\psi}}<0
+   \end{array}
+   \right.
+   \]
+
+
+were :math:`{k}` is the force constant that determines how aggressive is the external alignment field, :math:`{\hat{u}_i}` is the axis of the finite-size particle to be aligned with respect to the direction of the external field, and :math:`{\hat{\psi}}` is the unit directional vector. The direction of :math:`{\hat{\psi}}` can be set in any direction of
+a fixed 3D space.
+This torque allows a parallel alignment of the particles with
+respect to the field, regardless of whether their main axis (:math:`{\hat{u}_i}`) is pointing in the opposite direction as :math:`{\hat{\psi}}`.
+
+This command can be used to induce an artificial alignment to finite-size particles in a simulation, such as for liquid crystal simulations of uniaxial or biaxial particles.
+
+*particle_axis* assumes that the orientation of each site in the specified group-ID  is given by an orthonormal basis ( :math:`{\hat{f}}` , :math:`{\hat{v}}` , :math:`{\hat{u}}`), and therefore one must specify the direction to be oriented.
+
+External field component values can take any desired values since they are normalized in the code, but it is suggested to use numbers from 0 to 1.
+
+----------------------------------------------------
+
+Note that this fix can only act on finite-size particles. Therefore, there must be an Ellipsoids section in the LAMMPS input to obtain the orientation of the particles.
+See `atom_style command`_  ellipsoid.
+
+.. _`atom_style command`: https://docs.lammps.org/atom_style.html
+
+Restart, output, run start/stop
+-------------------------------------------------------------
+
+No information about this fix is written to `binary restart files`_.
+
+.. _`binary restart files`: https://docs.lammps.org/restart.html
+
+No parameter of this fix can be used with the start/stop keywords of the run command.
+
+
+Restrictions
+-----------------
+
+This fix does not support equal-style or atom-style variable_.
+
+ .. _variable: https://docs.lammps.org/variable.html
+
+Particles acted on by the potential can be finite-size aspherical or spherical particles.
+
+This fix is only enabled if LAMMPS was compiled with fix_ext_alignment.cpp and fix_ext_alignment.h.
+
+.. note::
+
+   This fix is currently supported in the latest LAMMPS stable release 23 Jun 2022.
+   See the LAMMPS_ website for more info.
+
+.. _LAMMPS: https://www.lammps.org/download.html
+
+
+Related commands
+-----------------
+
+`fix addforce`_, `fix efield`_
+
+ .. _`fix addforce`: https://docs.lammps.org/fix_addforce.html
+ .. _`fix efield`: https://docs.lammps.org/fix_efield.html
+
+Default
+----------
+
+none
+
+
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:

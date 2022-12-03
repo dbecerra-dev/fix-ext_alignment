@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fix ext_alignment command &mdash; fix ext_alignment 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> fix ext_alignment
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">fix ext_alignment command</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#restart-output-run-start-stop">Restart, output, run start/stop</a></li>
+<li><a class="reference internal" href="#restrictions">Restrictions</a></li>
+<li><a class="reference internal" href="#related-commands">Related commands</a></li>
+<li><a class="reference internal" href="#default">Default</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">fix ext_alignment</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">fix ext_alignment command</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fix-ext-alignment-command">
+<h1>fix ext_alignment command<a class="headerlink" href="#fix-ext-alignment-command" title="Permalink to this heading"></a></h1>
+<section id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fix</span> <span class="n">ID</span> <span class="n">group</span><span class="o">-</span><span class="n">ID</span> <span class="n">ext_alignment</span> <span class="n">particle_axis</span> <span class="n">fdx</span> <span class="n">fdy</span> <span class="n">fdz</span> <span class="n">force_constant</span>
+</pre></div>
+</div>
+<ul>
+<li><p>ID, group-ID are documented in <a class="reference external" href="https://docs.lammps.org/fix.html">fix</a> command</p></li>
+<li><p>ext_alignment = style name of this fix command</p></li>
+<li><p>particle_axis = <em>angle_f</em> or <em>angle_v</em> or <em>angle_u</em></p></li>
+<li><p>fdx,fdy,fdz = external field component values (distance units)</p></li>
+<li><p>force_constant = alignment force constant magnitude (force units)</p>
+<blockquote>
+<div></div></blockquote>
+</li>
+</ul>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fix</span> <span class="n">torque</span> <span class="nb">all</span> <span class="n">ext_alignment</span> <span class="n">angle_u</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">90.0</span>
+<span class="n">fix</span> <span class="n">torque</span> <span class="n">crystals</span> <span class="n">ext_alignment</span> <span class="n">angle_v</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">150.0</span>
+<span class="n">fix</span> <span class="n">field</span> <span class="n">polymer</span> <span class="n">ext_alignment</span> <span class="n">angle_u</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mf">1000.0</span>
+</pre></div>
+</div>
+</section>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>Add a torque to a specified axis of a particular group of finite-size particles with respect to a fixed direction.
+The applied torque is as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+{\bf\tau} =
+\left\{
+\begin{array}{
+  &#64;{}% no padding
+  l&#64;{\quad}% some padding
+  r&#64;{}% no padding
+  &gt;{{}}r&#64;{}% no padding
+  &gt;{{}}l&#64;{}% no padding
+}
+  k({\hat{u}_i}{\times}{\hat{\psi}}),&amp;         &amp; {\rm if} &amp; {\hat{u}_i}{\cdot}{\hat{\psi}}&gt;0 \\
+  -k({\hat{u}_i}{\times}{\hat{\psi}}),&amp;        &amp; {\rm if} &amp; {\hat{u}_i}{\cdot}{\hat{\psi}}&lt;0
+\end{array}
+\right.
+\]</div><p>were <span class="math notranslate nohighlight">\({k}\)</span> is the force constant that determines how aggressive is the external alignment field, <span class="math notranslate nohighlight">\({\hat{u}_i}\)</span> is the axis of the finite-size particle to be aligned with respect to the direction of the external field, and <span class="math notranslate nohighlight">\({\hat{\psi}}\)</span> is the unit directional vector. The direction of <span class="math notranslate nohighlight">\({\hat{\psi}}\)</span> can be set in any direction of
+a fixed 3D space.
+This torque allows a parallel alignment of the particles with
+respect to the field, regardless of whether their main axis (<span class="math notranslate nohighlight">\({\hat{u}_i}\)</span>) is pointing in the opposite direction as <span class="math notranslate nohighlight">\({\hat{\psi}}\)</span>.</p>
+<p>This command can be used to induce an artificial alignment to finite-size particles in a simulation, such as for liquid crystal simulations of uniaxial or biaxial particles.</p>
+<p><em>particle_axis</em> assumes that the orientation of each site in the specified group-ID  is given by an orthonormal basis ( <span class="math notranslate nohighlight">\({\hat{f}}\)</span> , <span class="math notranslate nohighlight">\({\hat{v}}\)</span> , <span class="math notranslate nohighlight">\({\hat{u}}\)</span>), and therefore one must specify the direction to be oriented.</p>
+<p>External field component values can take any desired values since they are normalized in the code, but it is suggested to use numbers from 0 to 1.</p>
+<hr class="docutils" />
+<p>Note that this fix can only act on finite-size particles. Therefore, there must be an Ellipsoids section in the LAMMPS input to obtain the orientation of the particles.
+See <a class="reference external" href="https://docs.lammps.org/atom_style.html">atom_style command</a>  ellipsoid.</p>
+</section>
+<section id="restart-output-run-start-stop">
+<h2>Restart, output, run start/stop<a class="headerlink" href="#restart-output-run-start-stop" title="Permalink to this heading"></a></h2>
+<p>No information about this fix is written to <a class="reference external" href="https://docs.lammps.org/restart.html">binary restart files</a>.</p>
+<p>No parameter of this fix can be used with the start/stop keywords of the run command.</p>
+</section>
+<section id="restrictions">
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this heading"></a></h2>
+<p>This fix does not support equal-style or atom-style <a class="reference external" href="https://docs.lammps.org/variable.html">variable</a>.</p>
+<blockquote>
+<div></div></blockquote>
+<p>Particles acted on by the potential can be finite-size aspherical or spherical particles.</p>
+<p>This fix is only enabled if LAMMPS was compiled with fix_ext_alignment.cpp and fix_ext_alignment.h.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This fix is currently supported in the latest LAMMPS stable release 23 Jun 2022.
+See the <a class="reference external" href="https://www.lammps.org/download.html">LAMMPS</a> website for more info.</p>
+</div>
+</section>
+<section id="related-commands">
+<h2>Related commands<a class="headerlink" href="#related-commands" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://docs.lammps.org/fix_addforce.html">fix addforce</a>, <a class="reference external" href="https://docs.lammps.org/fix_efield.html">fix efield</a></p>
+<blockquote>
+<div></div></blockquote>
+</section>
+<section id="default">
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this heading"></a></h2>
+<p>none</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Diego Becerra and Lisa M. Hall.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
